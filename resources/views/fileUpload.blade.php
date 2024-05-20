@@ -18,9 +18,15 @@
                 <form action="{{ url('/file-upload') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
+                        <label for="name" class="form-label">Nama File</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="file" class="form-label">File</label>
-                        <input type="file" class="form-control @error('file') is-invalid @enderror" id="file"
-                            name="file">
+                        <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file">
                         @error('file')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -28,6 +34,14 @@
 
                     <button type="submit" class="btn btn-primary d-block w-100">Upload</button>
                 </form>
+
+                {{-- @if (session('success'))
+                    <div class="alert alert-success mt-4">{{ session('success') }}</div>
+                @endif
+
+                @if (session('image'))
+                    <img src="{{ session('image') }}" alt="" class="mt-4">
+                @endif --}}
             </div>
         </div>
     </div>
@@ -38,3 +52,4 @@
 </script>
 
 </html>
+
