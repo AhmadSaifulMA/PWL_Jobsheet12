@@ -32,6 +32,15 @@ class FileUploadController extends Controller
         $request->validate([
             'file' => 'required|file|image|max:5000'
         ]);
-        echo $request->file('file')->getClientOriginalName()." lolos validasi";
+        // $path = $request->file('file')->store('uploads');
+        $extFile = $request->file->getClientOriginalName();
+        $namaFile = "web-" . time() . "." . $extFile;
+        $path = $request->file('file')->storeAs('public', $namaFile);
+        // echo $request->file('file')->getClientOriginalName()." lolos validasi";
+
+        $pathBaru = asset("storage/".$namaFile);
+        echo "Proses upload berhasil, File berada di : $path";
+        echo "<br>";
+        echo "tampilkan link : <a href='$pathBaru'>$pathBaru</a>";
     }
 }
