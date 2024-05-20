@@ -35,10 +35,13 @@ class FileUploadController extends Controller
         // $path = $request->file('file')->store('uploads');
         $extFile = $request->file->getClientOriginalName();
         $namaFile = "web-" . time() . "." . $extFile;
-        $path = $request->file('file')->storeAs('public', $namaFile);
+        $path = $request->file->move('gambar', $namaFile);
+        $path = str_replace('\\', '//', $path);
+        echo "variabel path berisi : $path <br>";
+
         // echo $request->file('file')->getClientOriginalName()." lolos validasi";
 
-        $pathBaru = asset("storage/".$namaFile);
+        $pathBaru = asset("gambar/".$namaFile);
         echo "Proses upload berhasil, File berada di : $path";
         echo "<br>";
         echo "tampilkan link : <a href='$pathBaru'>$pathBaru</a>";
